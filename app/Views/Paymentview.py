@@ -31,7 +31,7 @@ class StripeCheckoutAPIView(TemplateView):
       'stripe_public_key' : settings.PUBLISH_KEY
     }
     return context
-
+  @csrf_exempt
   def post(self, request, *args, **kwargs):
         context={}
         # print("iddddd",request.user.subscription.id)
@@ -74,6 +74,8 @@ class StripeCheckoutAPIView(TemplateView):
     
 class SuccessPayment(TemplateView):
   template_name = 'payment/success.html'
+  
+  @csrf_exempt
   def get_context_data(self, **kwargs,):
     a=stripe.Subscription.list(limit=1)
     b= a.data[0].id
