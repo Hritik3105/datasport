@@ -2,8 +2,9 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
+from django.views.decorators.csrf import csrf_exempt
 
-
+@csrf_exempt
 def contact(request):
     if request.method =="POST":
         name = request.POST.get('name')
